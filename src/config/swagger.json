@@ -1,0 +1,142 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Swagger for a LUIZA-LABS-EXAM, Favorite Lists.",
+        "version": "1.0.0",
+		"title": "Swagger LUIZA-LABS-EXAM, Favorite Lists.",
+        "contact": {
+            "email": "vgc.carneiro@gmail.com"
+        }
+    },
+    "schemes": ["http"],
+    "tags": [{
+        "name": "fav-list",
+        "description": "Everything related to a favorite lists"
+    }],
+    "paths": {
+        "/client/{id}": {
+            "get": {
+                "tags": ["fav-list"],
+                "summary": "Consult favorite list by client id",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "token",
+                    "in": "header",
+                    "description": "Token with JWT",
+                    "required": true,
+                    "type": "string"
+                },{
+					"name": "id",
+                    "in": "path",
+                    "description": "Hash id of a client on MongoDB.",
+                    "required": true,
+                    "type": "string"
+				}],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/favoriteList"
+                        }
+					}
+                }
+			}
+		},
+		"/client/email/{email}": {
+            "get": {
+                "tags": ["fav-list"],
+                "summary": "Consult favorite list by client email",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "token",
+                    "in": "header",
+                    "description": "Token with JWT",
+                    "required": true,
+                    "type": "string"
+                },{
+					"name": "email",
+                    "in": "path",
+                    "description": "Email of a client on MongoDB.",
+                    "required": true,
+                    "type": "string"
+				}],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/favoriteList"
+                        }
+					}
+                }
+			}
+		}
+	},
+	"definitions": {
+		"favoriteList": {
+			"type": "object",
+			"properties": {
+				"_id": {
+					"type": "string",
+					"description": "Hash da lista favorita."
+				},
+				"clientName": {
+					"type": "string",
+					"description": "Nome do cliente."
+				},
+				"clientEmail": {
+					"type": "string",
+					"description": "Email do client."
+				},
+				"active": {
+					"type": "boolean",
+					"description": "boolean para determinar se a lista favorita está ativo ou não"
+				},
+				"productList": {
+					"type": "array",
+                    "items": {
+                        "$ref": "#/definitions/product"
+                    }
+				},
+				"updatedAt": {
+					"type": "string",
+					"description": "Data de atualização"
+				},
+				"createdAt": {
+					"type": "string",
+					"description": "Data de criação"
+				}
+			}
+		},
+		"product": {
+			"type": "object",
+			"properties": {
+				"price": {
+					"type": "number",
+					"description": "Valor do produto."
+				},
+				"image": {
+					"type": "string",
+					"description": "URL da imagem do produto."
+				},
+				"brand": {
+					"type": "string",
+					"description": "Marca do produto."
+				},
+				"id": {
+					"type": "string",
+					"description": "ID do produto que pega da API de produtos"
+				},
+				"title": {
+					"type": "string",
+					"description": "Nome do produto"
+				},
+				"reviewScore": {
+					"type": "float",
+					"description": "Valor de avaliação do produto"
+				}
+			}
+        }
+	},
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}
