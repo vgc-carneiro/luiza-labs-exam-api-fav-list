@@ -6,7 +6,7 @@ serviceAccount:
   name:
 ####################
 application: 
-  name: api-client
+  name: api-fav-list
   version: v1
 replicas:
   min: __{minReplicas}__
